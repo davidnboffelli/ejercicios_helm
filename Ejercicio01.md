@@ -1,2 +1,2 @@
-Como instalar el chart de postgres? y el de wordpress?
+La idea es agregar aquí preguntas que los alumnos puedan responder consultando Helm Hub o ArtifactHub
 
