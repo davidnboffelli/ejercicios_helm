@@ -32,4 +32,6 @@ En este ejercicio, deberás desplegar y empaquetar una aplicación utilizando un
 
 ## Entregables
 
-- Capturas de pantalla de todos los comandos ejecutados, junto con sus respectivas salidas.
+- Capturas de pantalla de todos los resultados.
+- Archivo con los comandos ejecutados.
+- Archivos de configuración de Kubernetes (`.yaml`).

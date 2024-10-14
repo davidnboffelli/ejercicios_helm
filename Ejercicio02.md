@@ -28,4 +28,6 @@ En este ejercicio, trabajaremos con el chart de WordPress y aprenderemos a gesti
 
 ## Entregables
 
-- Captura de pantalla de todos los comandos ejecutados y sus salidas por pantalla.
+- Capturas de pantalla de todos los resultados.
+- Archivo con los comandos ejecutados.
+- Archivos de configuración de Kubernetes (`.yaml`).

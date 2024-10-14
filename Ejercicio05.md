@@ -27,5 +27,7 @@ En este ejercicio, deberás reutilizar el chart de Helm que implementa WordPress
 
 ## Entregables
 
-- Capturas de pantalla de todos los comandos ejecutados, junto con sus respectivas salidas.
+- Capturas de pantalla de todos los resultados.
+- Archivo con los comandos ejecutados.
 - El archivo `values.yaml` creado para el despliegue.
+- Archivos de configuración de Kubernetes (`.yaml`).
