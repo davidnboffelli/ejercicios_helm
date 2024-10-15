@@ -71,7 +71,7 @@ Este ejercicio tiene como propósito de familiarizarnos con la lectura de la doc
 
 ---
 
-## **Parte 6: Preguntas Extras**
+## **Parte 6: Preguntas de Personalización y Comparación **
 
 14. **Personalización del Chart**  
     - Si quisieras personalizar la instalación del *chart* (por ejemplo, cambiar el puerto de la aplicación o modificar los recursos asignados), ¿qué pasos seguirías para hacerlo? ¿Qué archivos o secciones de la documentación consultarías?
