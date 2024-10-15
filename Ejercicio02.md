@@ -145,7 +145,3 @@ En este ejercicio, vamos a trabajar con el *chart* de **WordPress** y aprenderem
 - Capturas de pantalla de todos los resultados obtenidos en cada paso del ejercicio.
 - Un archivo de texto con los comandos que has ejecutado.
 - Archivos de configuración de Kubernetes generados (.yaml).
-
----
-
-Este ejercicio está diseñado para ayudarte a comprender cómo gestionar aplicaciones en Kubernetes utilizando Helm, desde el despliegue hasta la actualización, rollback y eliminación de *releases*.
