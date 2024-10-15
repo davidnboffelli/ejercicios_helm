@@ -1,4 +1,4 @@
-# **Ejercicio 04: Desplegando Aplicaciones Complejas en Kubernetes Usando Helm y Values.yaml**
+# **Ejercicio 03: Desplegando Aplicaciones Complejas en Kubernetes Usando Helm y Values.yaml**
 
 ### **Objetivo**
 
