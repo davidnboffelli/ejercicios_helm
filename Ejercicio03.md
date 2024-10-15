@@ -4,10 +4,6 @@
 
 El objetivo de este ejercicio es aprender a desplegar aplicaciones complejas en Kubernetes utilizando Helm, gestionando configuraciones a través de un archivo `values.yaml`. Esto permitirá un despliegue más flexible y fácil de mantener para aplicaciones que requieren persistencia de datos, uso de secretos y ConfigMaps, y gestión adecuada de recursos.
 
-### **¡Importante!**
-
-Es fundamental tener cuidado al manejar información sensible en tus soluciones. Recuerda que otros pueden acceder a los datos en tus entregables, lo que podría comprometer la seguridad de la información. **¡Asegúrate de proteger tus datos y los de tus clientes en todo momento!**
-
 ---
 
 ### **Enunciado**
