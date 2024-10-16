@@ -1,115 +1,29 @@
-# **Ejercicio 03: Crear y Empaquetar Aplicaciones Complejas en Kubernetes Usando Helm**
+# **Ejercicio 03: Desplegando Nginx en Kubernetes con Helm**
 
-### **Objetivo**
+## Objetivo
 
-El objetivo de este ejercicio es aprender a crear manualmente los recursos de Kubernetes (como Deployments, Services, StatefulSets) y empaquetarlos en un chart de Helm propio. Con lo que conseguiremos desplegar aplicaciones complejas con persistencia de datos, secretos y ConfigMaps, gestionando configuraciones a través de un archivo `values.yaml`.
+El objetivo de este ejercicio es que los estudiantes aprendan a desplegar un chart de Helm utilizando un archivo `values.yaml`, facilitando configuraciones específicas y permitiendo un despliegue flexible para aplicaciones en Kubernetes.
 
----
+## Enunciado
 
-### **Enunciado**
+En este ejercicio, deberás desplegar el chart `bitnami/nginx`, configurando todos los elementos necesarios a través de un archivo `values.yaml`.
 
-En este ejercicio, deberás **crear manualmente** los manifiestos de Kubernetes necesarios para una aplicación compuesta por **WordPress**, **MySQL** y **phpMyAdmin**. Posteriormente, empaquetarás estos manifiestos en un **chart de Helm propio** y desplegarás la aplicación en un clúster de Kubernetes utilizando este chart.
+### Requisitos del despliegue:
 
----
+1. **Descargar e instalar** el chart `bitnami/nginx` utilizando el comando que aparece en la documentación (en `artifacthub.io`).
 
-### **Requisitos del Despliegue:**
+1. **Crear un archivo `values.yaml`**: Debe incluir todas las configuraciones necesarias para el despliegue, tales como:
+   - Usar la imagen por defecto, pero en su versión `1.26.1-debian-12-r0`.
+   - Desplegar 3 réplicas.
+   - La estrategia de actualización debe ser `Recreate`.
+   - Desactivar `livenessProbe` y `readinessProbe`.
+   - Cambiar el puerto HTTP del servicio al `8081`.
+   - Habilitar la creación de un ingress, con el host en `prueba.nginx`.
 
-1. **Namespace:**
-   - Todos los componentes deben ser desplegados en un namespace llamado `wordpress`.
+1. **Actualizar** el chart desplegado, utilizando el fichero `value.yaml`.
 
-2. **Recursos de Kubernetes:**
-   - Deberás crear los manifiestos de los siguientes recursos:
-     - **WordPress**: 
-       - Utiliza la imagen `bitnami/wordpress`.
-       - Crea un **Deployment** para WordPress.
-       - Implementa un **volumen persistente** para almacenar los datos de WordPress.
-     - **MySQL**:
-       - Utiliza la imagen oficial de MySQL, asegurándote de usar la versión adecuada.
-       - Crea un **StatefulSet** para gestionar la persistencia de los datos de la base de datos.
-       - Implementa un **volumen persistente** para la base de datos.
-       - Configura los secretos necesarios (como las credenciales de acceso a la base de datos) usando un **Secret**.
-     - **phpMyAdmin**:
-       - Utiliza la imagen oficial de `phpmyadmin`.
-       - Crea un **Deployment** para phpMyAdmin.
-   - **Service**:
-     - Crea los **Services** necesarios para exponer WordPress, MySQL y phpMyAdmin.
-     - Para WordPress, expón el servicio en el puerto 80.
-     - Para MySQL, utiliza el puerto adecuado para la base de datos (3306).
-     - Para phpMyAdmin, expón el servicio en un puerto configurable.
-   - **ConfigMaps y Secretos**:
-     - Crea los **ConfigMaps** y **Secretos** necesarios para la configuración de la aplicación (por ejemplo, las credenciales de MySQL).
+1. **Verificar** que lo requerido en el value, fue desplegado con éxito.
+## Entregables
 
-3. **Empaquetar los Manifiestos en un Chart de Helm**:
-   - Crea un **chart de Helm** desde cero, empaquetando todos los manifiestos que creaste.
-   - Utiliza el comando `helm create <nombre-chart>` para generar la estructura básica de un chart.
-   - Coloca tus manifiestos de Kubernetes en la carpeta correspondiente dentro del chart (`templates/`).
-   - Asegúrate de que el chart esté correctamente estructurado y empaquetado.
-
-4. **Archivo values.yaml**:
-   - Crea un archivo `values.yaml` que incluya las configuraciones necesarias para los elementos a desplegar:
-     - **Versiones de las imágenes** de WordPress, MySQL y phpMyAdmin.
-     - **Configuraciones de WordPress** (nombre de la aplicación, URL, etc.).
-     - **Configuraciones de la Base de Datos** (credenciales, nombre de la base de datos, etc.).
-     - **Capacidad de los volúmenes persistentes**.
-     - **Configuraciones de phpMyAdmin**.
-     - Las opciones que no deben ser modificadas no deben estar incluidas en el `values.yaml`.
-
----
-
-### **Pasos del Despliegue:**
-
-1. **Iniciar el Entorno:**
-   - Asegúrate de que tu clúster de Kubernetes esté corriendo (puedes usar **Minikube** o cualquier otro clúster compatible con Kubernetes):
-     ```bash
-     minikube start
-     ```
-
-2. **Crear los Manifiestos:**
-   - Crea los manifiestos de Kubernetes (Deployment, StatefulSet, Service, Secret, ConfigMap, etc.) para WordPress, MySQL y phpMyAdmin. Los archivos deben estar en formato `.yaml`.
-
-3. **Empaquetar los Manifiestos en un Chart de Helm:**
-   - Usa el siguiente comando para crear la estructura básica de un chart de Helm:
-     ```bash
-     helm create wordpress-chart
-     ```
-   - Coloca todos los manifiestos en la carpeta `templates/` del chart.
-   - Modifica el archivo `Chart.yaml` para reflejar correctamente el nombre de tu chart y las versiones de los componentes.
-
-4. **Crear el Archivo values.yaml:**
-   - Configura el archivo `values.yaml` para gestionar las versiones de las imágenes, las credenciales, el tamaño de los volúmenes, y otras configuraciones necesarias.
-
-5. **Instalar el Chart de Helm:**
-   - Una vez que hayas empaquetado los manifiestos en el chart de Helm, instálalo en tu clúster utilizando:
-     ```bash
-     helm install <nombre-release> ./wordpress-chart --namespace wordpress --create-namespace
-     ```
-
-6. **Verificar el Despliegue:**
-   - Comprueba que los pods y servicios están corriendo correctamente en el namespace `wordpress`:
-     ```bash
-     kubectl get pods -n wordpress
-     kubectl get svc -n wordpress
-     ```
-
-7. **Acceso a la Aplicación:**
-   - Para acceder a WordPress y phpMyAdmin, verifica los servicios expuestos:
-     ```bash
-     kubectl get svc -n wordpress
-     ```
-   - Si estás usando **Minikube**, puedes acceder a los servicios utilizando:
-     ```bash
-     minikube service <nombre-release>-wordpress -n wordpress
-     minikube service <nombre-release>-phpmyadmin -n wordpress
-     ```
-
----
-
-### **Entregables**
-
-- **Capturas de pantalla** de todos los resultados obtenidos durante el despliegue (pods, servicios, acceso a la aplicación).
-- Un archivo de texto con los **comandos ejecutados**.
-- El **archivo values.yaml** que has creado para el despliegue.
-- Los **archivos de manifiestos de Kubernetes** (`.yaml`), como los manifiestos de WordPress, MySQL y phpMyAdmin.
-- El **chart de Helm** empaquetado, con todos los recursos dentro de la carpeta `templates/`.
-
-
+- El archivo `values.yaml` creado para el despliegue.
+- Un README explicando todo el proceso y adjuntando imágenes.

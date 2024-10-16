@@ -1,4 +1,4 @@
-# Ejercicio 5
+# **Ejercicio 05: Condiciones, bucles y operadores en Helm**
 
 ## Objetivo
 
@@ -27,7 +27,8 @@ En este ejercicio, deberás reutilizar el chart de Helm que implementa WordPress
 
 ## Entregables
 
-- Capturas de pantalla de todos los resultados.
-- Archivo con los comandos ejecutados.
-- El archivo `values.yaml` creado para el despliegue.
-- Archivos de configuración de Kubernetes (`.yaml`).
+- **Capturas de pantalla** de todos los resultados obtenidos durante el despliegue (pods, servicios, acceso a la aplicación).
+- Un archivo de texto con los **comandos ejecutados**.
+- El **archivo values.yaml** que has creado para el despliegue.
+- Los **archivos de manifiestos de Kubernetes** (`.yaml`), como los manifiestos de WordPress, MySQL y phpMyAdmin.
+- El **chart de Helm** empaquetado, con todos los recursos dentro de la carpeta `templates/`.

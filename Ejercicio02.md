@@ -1,4 +1,4 @@
-# **Ejercicio 02: Desplegando WordPress en Kubernetes con Helm**
+# **Ejercicio 02: Desplegando WordPress en Kubernetes con Helm y gestionando versionas**
 
 ### **Objetivos**
 

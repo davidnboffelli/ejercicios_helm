@@ -1,4 +1,4 @@
-# Ejercicio 5
+# **Ejercicio 06: Funciones en Helm**
 
 ## Objetivo
 
@@ -23,5 +23,8 @@ En este ejercicio, deberás reutilizar el chart de Helm anterior y aplicar funci
 
 ## Entregables
 
-- Archivos de configuración de Kubernetes (`.yaml`).
-- Un README explicando todo el proceso y adjuntando imágenes.
+- **Capturas de pantalla** de todos los resultados obtenidos durante el despliegue (pods, servicios, acceso a la aplicación).
+- Un archivo de texto con los **comandos ejecutados**.
+- El **archivo values.yaml** que has creado para el despliegue.
+- Los **archivos de manifiestos de Kubernetes** (`.yaml`), como los manifiestos de WordPress, MySQL y phpMyAdmin.
+- El **chart de Helm** empaquetado, con todos los recursos dentro de la carpeta `templates/`.
