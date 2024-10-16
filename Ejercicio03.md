@@ -1,14 +1,20 @@
-# **Ejercicio 03: Desplegando Aplicaciones Complejas en Kubernetes Usando Helm y Values.yaml**
+# **Ejercicio 03: Crear y Empaquetar Aplicaciones Complejas en Kubernetes Usando Helm**
 
 ### **Objetivo**
 
-El objetivo de este ejercicio es aprender a desplegar aplicaciones complejas en Kubernetes utilizando Helm, gestionando configuraciones a través de un archivo `values.yaml`. Esto permitirá un despliegue más flexible y fácil de mantener para aplicaciones que requieren persistencia de datos, uso de secretos y ConfigMaps, y gestión adecuada de recursos.
+El objetivo de este ejercicio es aprender a crear manualmente los recursos de Kubernetes (como Deployments, Services, StatefulSets) y empaquetarlos en un chart de Helm propio. Esto les permitirá desplegar aplicaciones complejas con persistencia de datos, secretos y ConfigMaps, gestionando configuraciones a través de un archivo `values.yaml`.
+
+---
+
+### **¡Importante!**
+
+Es fundamental tener cuidado al manejar información sensible en tus soluciones. Recuerda que otros pueden acceder a los datos en tus entregables, lo que podría comprometer la seguridad de la información. **¡Asegúrate de proteger tus datos y los de tus clientes en todo momento!**
 
 ---
 
 ### **Enunciado**
 
-En este ejercicio, deberás desplegar y empaquetar una aplicación utilizando Helm, configurando todos los elementos a través de un archivo `values.yaml`. La aplicación incluirá **WordPress**, **MySQL** y **phpMyAdmin**, con las configuraciones adecuadas para garantizar la persistencia de datos y el uso de secretos y ConfigMaps.
+En este ejercicio, deberás **crear manualmente** los manifiestos de Kubernetes necesarios para una aplicación compuesta por **WordPress**, **MySQL** y **phpMyAdmin**. Posteriormente, empaquetarás estos manifiestos en un **chart de Helm propio** y desplegarás la aplicación en un clúster de Kubernetes utilizando este chart.
 
 ---
 
@@ -17,19 +23,41 @@ En este ejercicio, deberás desplegar y empaquetar una aplicación utilizando He
 1. **Namespace:**
    - Todos los componentes deben ser desplegados en un namespace llamado `wordpress`.
 
-2. **Archivo values.yaml:**
-   - Deberás crear un archivo `values.yaml` que incluya todas las configuraciones necesarias para los elementos a desplegar. Este archivo debe contener:
-     - **Namespace**.
+2. **Recursos de Kubernetes:**
+   - Deberás crear los manifiestos de los siguientes recursos:
+     - **WordPress**: 
+       - Utiliza la imagen `bitnami/wordpress`.
+       - Crea un **Deployment** para WordPress.
+       - Implementa un **volumen persistente** para almacenar los datos de WordPress.
+     - **MySQL**:
+       - Utiliza la imagen oficial de MySQL, asegurándote de usar la versión adecuada.
+       - Crea un **StatefulSet** para gestionar la persistencia de los datos de la base de datos.
+       - Implementa un **volumen persistente** para la base de datos.
+       - Configura los secretos necesarios (como las credenciales de acceso a la base de datos) usando un **Secret**.
+     - **phpMyAdmin**:
+       - Utiliza la imagen oficial de `phpmyadmin`.
+       - Crea un **Deployment** para phpMyAdmin.
+   - **Service**:
+     - Crea los **Services** necesarios para exponer WordPress, MySQL y phpMyAdmin.
+     - Para WordPress, expón el servicio en el puerto 80.
+     - Para MySQL, utiliza el puerto adecuado para la base de datos (3306).
+     - Para phpMyAdmin, expón el servicio en un puerto configurable.
+   - **ConfigMaps y Secretos**:
+     - Crea los **ConfigMaps** y **Secretos** necesarios para la configuración de la aplicación (por ejemplo, las credenciales de MySQL).
+
+3. **Empaquetar los Manifiestos en un Chart de Helm**:
+   - Crea un **chart de Helm** desde cero, empaquetando todos los manifiestos que creaste.
+   - Utiliza el comando `helm create <nombre-chart>` para generar la estructura básica de un chart.
+   - Coloca tus manifiestos de Kubernetes en la carpeta correspondiente dentro del chart (`templates/`).
+   - Asegúrate de que el chart esté correctamente estructurado y empaquetado.
+
+4. **Archivo values.yaml**:
+   - Crea un archivo `values.yaml` que incluya las configuraciones necesarias para los elementos a desplegar:
      - **Versiones de las imágenes** de WordPress, MySQL y phpMyAdmin.
-     - **Configuraciones de WordPress**, como el nombre de la aplicación, la URL, y otros parámetros relacionados.
-     - **Configuraciones de la Base de Datos** (MySQL):
-       - Debes usar la **imagen oficial de MySQL**, asegurándote de usar la versión adecuada.
-       - Implementa un **volumen persistente** para almacenar los datos de la base de datos.
-       - No uses un `Deployment` para este componente. En su lugar, usa un **StatefulSet**, ya que es el recurso adecuado para gestionar bases de datos con persistencia.
-     - **Configuraciones de phpMyAdmin**:
-       - Utiliza la **imagen oficial de phpmyadmin**.
-     - **Capacidad de los volúmenes persistentes** para WordPress y MySQL.
-     - **Secretos y ConfigMaps** necesarios para la configuración segura de la aplicación (como contraseñas de la base de datos, URL, etc.).
+     - **Configuraciones de WordPress** (nombre de la aplicación, URL, etc.).
+     - **Configuraciones de la Base de Datos** (credenciales, nombre de la base de datos, etc.).
+     - **Capacidad de los volúmenes persistentes**.
+     - **Configuraciones de phpMyAdmin**.
      - Las opciones que no deben ser modificadas no deben estar incluidas en el `values.yaml`.
 
 ---
@@ -42,24 +70,34 @@ En este ejercicio, deberás desplegar y empaquetar una aplicación utilizando He
      minikube start
      ```
 
-2. **Crear el Archivo values.yaml:**
-   - Crea el archivo `values.yaml` con todas las configuraciones mencionadas anteriormente.
-   - Asegúrate de definir correctamente los valores como versiones de las imágenes, configuraciones de WordPress y MySQL, secretos y volúmenes.
+2. **Crear los Manifiestos:**
+   - Crea los manifiestos de Kubernetes (Deployment, StatefulSet, Service, Secret, ConfigMap, etc.) para WordPress, MySQL y phpMyAdmin. Los archivos deben estar en formato `.yaml`.
 
-3. **Instalar el Chart Usando Helm:**
-   - Utiliza Helm para instalar la aplicación basada en el `values.yaml` que has creado:
+3. **Empaquetar los Manifiestos en un Chart de Helm:**
+   - Usa el siguiente comando para crear la estructura básica de un chart de Helm:
      ```bash
-     helm install <nombre-release> bitnami/wordpress -f values.yaml --namespace wordpress --create-namespace
+     helm create wordpress-chart
+     ```
+   - Coloca todos los manifiestos en la carpeta `templates/` del chart.
+   - Modifica el archivo `Chart.yaml` para reflejar correctamente el nombre de tu chart y las versiones de los componentes.
+
+4. **Crear el Archivo values.yaml:**
+   - Configura el archivo `values.yaml` para gestionar las versiones de las imágenes, las credenciales, el tamaño de los volúmenes, y otras configuraciones necesarias.
+
+5. **Instalar el Chart de Helm:**
+   - Una vez que hayas empaquetado los manifiestos en el chart de Helm, instálalo en tu clúster utilizando:
+     ```bash
+     helm install <nombre-release> ./wordpress-chart --namespace wordpress --create-namespace
      ```
 
-4. **Verificar el Despliegue:**
+6. **Verificar el Despliegue:**
    - Comprueba que los pods y servicios están corriendo correctamente en el namespace `wordpress`:
      ```bash
      kubectl get pods -n wordpress
      kubectl get svc -n wordpress
      ```
 
-5. **Acceso a la Aplicación:**
+7. **Acceso a la Aplicación:**
    - Para acceder a WordPress y phpMyAdmin, verifica los servicios expuestos:
      ```bash
      kubectl get svc -n wordpress
@@ -70,12 +108,6 @@ En este ejercicio, deberás desplegar y empaquetar una aplicación utilizando He
      minikube service <nombre-release>-phpmyadmin -n wordpress
      ```
 
-6. **Secretos y ConfigMaps:**
-   - Asegúrate de que los **Secretos** y **ConfigMaps** necesarios estén creados y configurados correctamente. Por ejemplo, las contraseñas de MySQL deben estar gestionadas a través de un **Secret**:
-     ```bash
-     kubectl get secrets -n wordpress
-     ```
-
 ---
 
 ### **Entregables**
@@ -83,4 +115,7 @@ En este ejercicio, deberás desplegar y empaquetar una aplicación utilizando He
 - **Capturas de pantalla** de todos los resultados obtenidos durante el despliegue (pods, servicios, acceso a la aplicación).
 - Un archivo de texto con los **comandos ejecutados**.
 - El **archivo values.yaml** que has creado para el despliegue.
-- Los **archivos de configuración de Kubernetes** (`.yaml`), como los manifiestos generados para WordPress, MySQL y phpMyAdmin.
+- Los **archivos de manifiestos de Kubernetes** (`.yaml`), como los manifiestos de WordPress, MySQL y phpMyAdmin.
+- El **chart de Helm** empaquetado, con todos los recursos dentro de la carpeta `templates/`.
+
+
