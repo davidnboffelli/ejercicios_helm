@@ -1,18 +1,24 @@
 # **Ejercicio 05: Condiciones, bucles y operadores en Helm**
 
-## Objetivo
+### **Objetivo**
 
 El objetivo de este ejercicio es que los estudiantes aprendan a utilizar estructuras de control como condiciones y bucles en un archivo values.yaml de un chart de Helm. A través de la configuración de un despliegue complejo, los alumnos podrán aplicar sus conocimientos sobre la parametrización de aplicaciones en Kubernetes, permitiendo la personalización de variables de entorno y configuraciones de servicios.
 
-## ¡Importante!
+---
+
+### **¡Importante!**
 
 Ten mucho cuidado con los valores sensibles que puedas exponer en tus soluciones. Recuerda que otros pueden acceder a los datos en tus entregables, lo que podría comprometer la seguridad de la información. ¡Siempre asegúrate de proteger tus datos y los de tus clientes!
 
-## Enunciado
+---
+
+### **Enunciado**
 
 En este ejercicio, deberás reutilizar el chart de Helm que implementa WordPress y MySQL, ahora aplicando condiciones y bucles.
 
-### Requisitos del despliegue:
+---
+
+### **Requisitos del despliegue:**
 
 1. **Archivo `values.yaml`**: Debe incluir todas las configuraciones necesarias para:
 
@@ -25,7 +31,9 @@ En este ejercicio, deberás reutilizar el chart de Helm que implementa WordPress
 
     - Usar operadores para asegurarse de que phpmyadmin se despliegue solo si se habilita tambien el despliegue de la base de datos.
 
-## Entregables
+---
+
+### **Entregables**
 
 - **Capturas de pantalla** de todos los resultados obtenidos durante el despliegue (pods, servicios, acceso a la aplicación).
 - Un archivo de texto con los **comandos ejecutados**.

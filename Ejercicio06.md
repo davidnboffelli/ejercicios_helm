@@ -1,18 +1,24 @@
 # **Ejercicio 06: Funciones en Helm**
 
-## Objetivo
+### **Objetivo**
 
 El objetivo de este ejercicio es aplicar funciones en un chart de Helm reutilizado, permitiendo la automatización en la generación de contraseñas y la manipulación de datos para mejorar la seguridad y la flexibilidad en la configuración de despliegues en Kubernetes.
 
-## ¡Importante!
+---
+
+### **¡Importante!**
 
 Ten mucho cuidado con los valores sensibles que puedas exponer en tus soluciones. Recuerda que otros pueden acceder a los datos en tus entregables, lo que podría comprometer la seguridad de la información. ¡Siempre asegúrate de proteger tus datos y los de tus clientes!
 
-## Enunciado
+---
+
+### **Enunciado**
 
 En este ejercicio, deberás reutilizar el chart de Helm anterior y aplicar funciones.
 
-### Requisitos del despliegue:
+---
+
+### **Requisitos del despliegue:**
 
 1. Mediante el uso de funciones y sobre los manifiestos del ejercicio anterior, debes realizar lo siguiente:
 
@@ -21,7 +27,9 @@ En este ejercicio, deberás reutilizar el chart de Helm anterior y aplicar funci
 - Mediante función, hacer que el nombre de la base de datos se ingrese con mayúsculas.
 - Si en el `value.yaml` no se ingresa el tag de Wordpress, hacer que por defecto tome la version `latest`.
 
-## Entregables
+---
+
+### **Entregables**
 
 - **Capturas de pantalla** de todos los resultados obtenidos durante el despliegue (pods, servicios, acceso a la aplicación).
 - Un archivo de texto con los **comandos ejecutados**.
