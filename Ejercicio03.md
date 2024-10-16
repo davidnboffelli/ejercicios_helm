@@ -2,7 +2,7 @@
 
 ### **Objetivo**
 
-El objetivo de este ejercicio es aprender a crear manualmente los recursos de Kubernetes (como Deployments, Services, StatefulSets) y empaquetarlos en un chart de Helm propio. Esto les permitirá desplegar aplicaciones complejas con persistencia de datos, secretos y ConfigMaps, gestionando configuraciones a través de un archivo `values.yaml`.
+El objetivo de este ejercicio es aprender a crear manualmente los recursos de Kubernetes (como Deployments, Services, StatefulSets) y empaquetarlos en un chart de Helm propio. Con lo que conseguiremos desplegar aplicaciones complejas con persistencia de datos, secretos y ConfigMaps, gestionando configuraciones a través de un archivo `values.yaml`.
 
 ---
 
