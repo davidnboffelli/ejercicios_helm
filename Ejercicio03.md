@@ -6,12 +6,6 @@ El objetivo de este ejercicio es aprender a crear manualmente los recursos de Ku
 
 ---
 
-### **¡Importante!**
-
-Es fundamental tener cuidado al manejar información sensible en tus soluciones. Recuerda que otros pueden acceder a los datos en tus entregables, lo que podría comprometer la seguridad de la información. **¡Asegúrate de proteger tus datos y los de tus clientes en todo momento!**
-
----
-
 ### **Enunciado**
 
 En este ejercicio, deberás **crear manualmente** los manifiestos de Kubernetes necesarios para una aplicación compuesta por **WordPress**, **MySQL** y **phpMyAdmin**. Posteriormente, empaquetarás estos manifiestos en un **chart de Helm propio** y desplegarás la aplicación en un clúster de Kubernetes utilizando este chart.
