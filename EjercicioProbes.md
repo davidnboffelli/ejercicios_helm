@@ -10,7 +10,7 @@ Ten mucho cuidado con los valores sensibles que puedas exponer en tus soluciones
 
 ## Enunciado
 
-En este ejercicio, deberás utilizar la imagen `dboffelli/testing_probes:1.0`, la cual está diseñada para probar el comportamiento de las sondas `readinessProbe` y `livenessProbe` en Kubernetes. 
+En este ejercicio, deberás utilizar la imagen `dboffelli/testing_probes:2.0`, la cual está diseñada para probar el comportamiento de las sondas `readinessProbe` y `livenessProbe` en Kubernetes. 
 
 ### Requisitos del despliegue:
 
