@@ -10,16 +10,16 @@ Ten mucho cuidado con los valores sensibles que puedas exponer en tus soluciones
 
 ## Enunciado
 
-En este ejercicio, deberás utilizar la imagen `dboffelli/testing_probes:2.0`, la cual está diseñada para probar el comportamiento de las sondas `readinessProbe` y `livenessProbe` en Kubernetes. 
+En este ejercicio, deberás utilizar la imagen `dboffelli/testing_probes:2.0`. Es una aplicación web hecha en GO y está diseñada para probar el comportamiento de las sondas `readinessProbe` y `livenessProbe` en Kubernetes. 
 
 ### Requisitos del despliegue:
 
 1. **Desplegar el contenedor:**
-   - Utilizar la imagen la imagen proporcionada para desplegar un Deployment.
+   - Utilizar la imagen proporcionada para desplegar un Deployment. Evaluar cuánto demora en levantar el servidor. Consultar los endpoints `/` y `/healthy`.
 
 2. **Configurar las sondas:**
-   - **Liveness Probe:** Configura una sonda de liveness para comprobar la existencia del fichero `/tmp/is_up`.
-   - **Readiness Probe:** Configura una sonda de readiness para verificar la existencia del fichero `/tmp/is_ready`. Esta sonda debería reflejar el comportamiento del contenedor (fallando y recuperándose cuando detecte la existencia del fichero `is_ready`).
+   - **Liveness Probe:** Configura una `livenessProbe` para comprobar que el servidor está corriendo. A la hora de configurarla, ten en cuenta el tiempo que demora en levantar.
+   - **Readiness Probe:** Configura una `readinessProbe` para verificar que el servidor está listo para recibir flujo de trabajo. Esta sonda debería reflejar el estado del contenedor (fallando y recuperándose según la respuesta que obtenga del endpoint `/healthy`).
 
 3. **Pruebas de despliegue:**
    - Realizar un despliegue y observar el comportamiento del contenedor con las sondas configuradas a lo largo de un minuto.
